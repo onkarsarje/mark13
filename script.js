@@ -1,3 +1,8 @@
+var dateInput = document.querySelector("#bday-input");
+var checkButton =document.querySelector("#show-btn");
+var resultDispaly = document.querySelector("#result");
+
+
 function reverseStr(str){
     var listOfChars =str.split("");
     var reverseListOfChars = listOfChars.reverse();
@@ -112,6 +117,22 @@ function getNextDate(date){
     };
 }
 
+function getNextPalindromeDate(date){
+    var ctr = 0;
+    var nextDate = getNextDate(date);
+
+    while(1){
+        ctr++;
+        var isPalindrome =checkPalindromeForAllDateFormats(nextDate);
+        if(isPalindrome){
+            break;
+        }
+        nextDate= getNextDate(nextDate);
+    }
+
+    return[ctr, nextDate];
+}
+
 function getPreviousDate(date){
     var day = date.day - 1;
     var month= date.month;
@@ -156,22 +177,6 @@ function getPreviousDate(date){
     };
 }
 
-function getNextPalindromeDate(date){
-    var ctr = 0;
-    var nextDate = getNextDate(date);
-
-    while(1){
-        ctr++;
-        var isPalindrome =checkPalindromeForAllDateFormats(nextDate);
-        if(isPalindrome){
-            break;
-        }
-        nextDate= getNextDate(nextDate);
-    }
-
-    return[ctr, nextDate];
-}
-
 function getPreviousPalindromeDate(date){
     var ctr=0;
     var prevDate= getPreviousDate(date);
@@ -186,10 +191,6 @@ function getPreviousPalindromeDate(date){
     }
     return[ctr, prevDate];
 }
-
-var dateInput = document.querySelector("#bday-input");
-var checkButton =document.querySelector("#show-btn");
-var resultDispaly = document.querySelector("#result");
 
 function clickHandler(){
     var bdayStr = dateInput.value;
